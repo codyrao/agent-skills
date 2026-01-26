@@ -1,5 +1,5 @@
 ---
-name: qa-case-skill
+name: qa-case
 description: 当用户需要根据 GitLab 代码变更生成测试用例时激活此技能。分析代码变更，识别影响的接口、页面、功能和流程，生成各端的功能测试用例、压测用例以及整体系统测试用例。
 references:
   - frontend.md
@@ -10,7 +10,7 @@ references:
   - system.md
 ---
 
-# QA Case Skill - 测试用例生成
+# QA Case - 测试用例生成
 
 ## 激活条件
 当用户需要根据 GitLab 代码变更生成测试用例时激活此技能。

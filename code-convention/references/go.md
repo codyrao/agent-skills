@@ -59,6 +59,8 @@
 - 注释以被注释对象的名称开头
 - 使用完整的句子，首字母大写，以句号结尾
 - 注释应解释"为什么"而不是"是什么"
+- **每个函数都需要加上中文注释，注释说明函数作用**
+- **函数中特别复杂的逻辑也需要加上中文注释，说明为什么这么写**
 
 ## 错误处理
 
@@ -218,3 +220,142 @@
 - 禁止在循环中捕获循环变量
 - 禁止使用 `time.Sleep` 等待 goroutine
 - 禁止在 defer 中修改返回值
+
+## 代码复用规范
+
+- 如果发现相似的代码超过2个，就要封装成函数调用
+- 提取公共逻辑到独立的函数中
+- 避免代码重复，提高代码复用性
+- 函数命名应清晰表达其功能
+
+**示例**：
+```go
+// 错误示例：相似的代码重复
+func ProcessUserA(user User) error {
+    if user.Name == "" {
+        return errors.New("name is empty")
+    }
+    if user.Email == "" {
+        return errors.New("email is empty")
+    }
+    // 处理用户A
+    return nil
+}
+
+func ProcessUserB(user User) error {
+    if user.Name == "" {
+        return errors.New("name is empty")
+    }
+    if user.Email == "" {
+        return errors.New("email is empty")
+    }
+    // 处理用户B
+    return nil
+}
+
+// 正确示例：封装成函数调用
+// ValidateUser 验证用户信息
+func ValidateUser(user User) error {
+    if user.Name == "" {
+        return errors.New("name is empty")
+    }
+    if user.Email == "" {
+        return errors.New("email is empty")
+    }
+    return nil
+}
+
+func ProcessUserA(user User) error {
+    if err := ValidateUser(user); err != nil {
+        return err
+    }
+    // 处理用户A
+    return nil
+}
+
+func ProcessUserB(user User) error {
+    if err := ValidateUser(user); err != nil {
+        return err
+    }
+    // 处理用户B
+    return nil
+}
+```
+
+## 函数长度规范
+
+- 函数的长度不宜过长，不易超过1千行
+- 如果超过一千行，需要封装内部子函数缩短单个函数的长度
+- 函数应保持单一职责，只做一件事
+- 复杂的逻辑应拆分为多个小函数
+
+**示例**：
+```go
+// 错误示例：函数过长
+func ProcessOrder(order Order) error {
+    // 1000多行代码
+    // 验证订单
+    // 检查库存
+    // 计算价格
+    // 创建支付
+    // 发送通知
+    // 更新库存
+    // 记录日志
+    // ... 更多代码
+    return nil
+}
+
+// 正确示例：封装内部子函数
+// ValidateOrder 验证订单
+func ValidateOrder(order Order) error {
+    // 验证逻辑
+    return nil
+}
+
+// CheckStock 检查库存
+func CheckStock(order Order) error {
+    // 检查库存逻辑
+    return nil
+}
+
+// CalculatePrice 计算价格
+func CalculatePrice(order Order) float64 {
+    // 计算价格逻辑
+    return 0
+}
+
+// CreatePayment 创建支付
+func CreatePayment(order Order) error {
+    // 创建支付逻辑
+    return nil
+}
+
+// SendNotification 发送通知
+func SendNotification(order Order) error {
+    // 发送通知逻辑
+    return nil
+}
+
+// ProcessOrder 处理订单
+func ProcessOrder(order Order) error {
+    if err := ValidateOrder(order); err != nil {
+        return err
+    }
+    
+    if err := CheckStock(order); err != nil {
+        return err
+    }
+    
+    price := CalculatePrice(order)
+    
+    if err := CreatePayment(order); err != nil {
+        return err
+    }
+    
+    if err := SendNotification(order); err != nil {
+        return err
+    }
+    
+    return nil
+}
+```

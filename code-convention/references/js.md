@@ -59,6 +59,8 @@
 - 多行注释使用 `/* */`
 - JSDoc 注释用于函数、类、模块的文档
 - 注释应解释"为什么"而不是"是什么"
+- **每个函数都需要加上中文注释，注释说明函数作用**
+- **函数中特别复杂的逻辑也需要加上中文注释，说明为什么这么写**
 
 ## 变量声明
 
@@ -254,3 +256,113 @@
 - 禁止使用 `arguments` 对象，使用剩余参数
 - 禁止使用 `new Function`
 - 禁止在模板字符串中嵌套模板字符串
+
+## 代码复用规范
+
+- 如果发现相似的代码超过2个，就要封装成函数调用
+- 提取公共逻辑到独立的函数中
+- 避免代码重复，提高代码复用性
+- 函数命名应清晰表达其功能
+
+**示例**：
+```javascript
+// 错误示例：相似的代码重复
+function processUserA(user) {
+    if (!user.name) {
+        throw new Error('name is empty');
+    }
+    if (!user.email) {
+        throw new Error('email is empty');
+    }
+    // 处理用户A
+}
+
+function processUserB(user) {
+    if (!user.name) {
+        throw new Error('name is empty');
+    }
+    if (!user.email) {
+        throw new Error('email is empty');
+    }
+    // 处理用户B
+}
+
+// 正确示例：封装成函数调用
+// validateUser 验证用户信息
+function validateUser(user) {
+    if (!user.name) {
+        throw new Error('name is empty');
+    }
+    if (!user.email) {
+        throw new Error('email is empty');
+    }
+}
+
+function processUserA(user) {
+    validateUser(user);
+    // 处理用户A
+}
+
+function processUserB(user) {
+    validateUser(user);
+    // 处理用户B
+}
+```
+
+## 函数长度规范
+
+- 函数的长度不宜过长，不易超过1千行
+- 如果超过一千行，需要封装内部子函数缩短单个函数的长度
+- 函数应保持单一职责，只做一件事
+- 复杂的逻辑应拆分为多个小函数
+
+**示例**：
+```javascript
+// 错误示例：函数过长
+function processOrder(order) {
+    // 1000多行代码
+    // 验证订单
+    // 检查库存
+    // 计算价格
+    // 创建支付
+    // 发送通知
+    // 更新库存
+    // 记录日志
+    // ... 更多代码
+}
+
+// 正确示例：封装内部子函数
+// validateOrder 验证订单
+function validateOrder(order) {
+    // 验证逻辑
+}
+
+// checkStock 检查库存
+function checkStock(order) {
+    // 检查库存逻辑
+}
+
+// calculatePrice 计算价格
+function calculatePrice(order) {
+    // 计算价格逻辑
+}
+
+// createPayment 创建支付
+function createPayment(order) {
+    // 创建支付逻辑
+}
+
+// sendNotification 发送通知
+function sendNotification(order) {
+    // 发送通知逻辑
+}
+
+// processOrder 处理订单
+function processOrder(order) {
+    validateOrder(order);
+    checkStock(order);
+    const price = calculatePrice(order);
+    createPayment(order);
+    sendNotification(order);
+}
+```

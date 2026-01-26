@@ -1,12 +1,12 @@
 ---
-name: mr-check-skill
+name: mr-check
 description: 当用户需要审查 GitLab 或 GitHub Merge Request (MR) / Pull Request (PR) 中的代码变更时激活此技能。扮演严谨、客观的资深技术负责人，深度分析代码变更并提供专业审查意见。
 references:
   - references/code-analysis-skill.md
   - references/repo-operations-skill.md
 ---
 
-# MR Check Skill
+# MR Check
 
 ## 激活条件
 当用户请求审查 GitLab 或 GitHub 的 Merge Request (MR) / Pull Request (PR) 代码变更时，激活此技能。
