@@ -1,19 +1,20 @@
 ---
 name: code-architecture
-description: 当用户需要生成代码或修改代码时，此技能用于指导代码的文件结构组织。根据代码语言和项目类型，按照各语言的官方规范和最佳实践来组织代码文件结构，确保代码结构清晰、易于维护和扩展。
+description: 当用户需要生成代码或修改代码时，此技能用于指导代码的文件结构组织。根据代码语言和项目类型（Go、JavaScript、Vue、React、Angular、Electron、Node.js等），按照各语言的官方规范和最佳实践来组织代码文件结构，确保代码结构清晰、易于维护和扩展。
 references:
-  - go.md
-  - js.md
-  - vue.md
-  - react.md
-  - angular.md
-  - electron.md
-  - nodejs.md
+  - references/go.md
+  - references/js.md
+  - references/vue.md
+  - references/react.md
+  - references/angular.md
+  - references/electron.md
+  - references/nodejs.md
 ---
 
 # 代码架构技能
 
 ## 概述
+
 本技能用于指导代码生成和代码修改时的文件结构组织。代码架构即文件组织架构遵循以下原则：
 
 1. **代码结构清晰**：文件和目录的命名和组织应该清晰明了，易于理解
@@ -22,19 +23,30 @@ references:
 ## 工作流程
 
 ### 1. 识别代码语言和项目类型
+
 - 分析用户请求，确定代码语言（Go、JavaScript、Vue、React、Angular、Electron、Node.js 等）
 - 识别项目类型（前端、后端、桌面应用等）
 
 ### 2. 选择对应的架构规范
-- 根据代码语言和项目类型，选择对应的 reference 文件
-- 参考 reference 文件中的架构规范和最佳实践
+
+根据代码语言和项目类型，选择对应的 reference 文件：
+
+- **Go 项目**：使用 [references/go.md](references/go.md)
+- **JavaScript 项目**：使用 [references/js.md](references/js.md)
+- **Vue 项目**：使用 [references/vue.md](references/vue.md)
+- **React 项目**：使用 [references/react.md](references/react.md)
+- **Angular 项目**：使用 [references/angular.md](references/angular.md)
+- **Electron 项目**：使用 [references/electron.md](references/electron.md)
+- **Node.js 项目**：使用 [references/nodejs.md](references/nodejs.md)
 
 ### 3. 生成或调整代码结构
+
 - 按照选定的架构规范，生成新的代码文件结构
 - 对于代码修改，调整现有文件结构以符合规范
 - 确保所有文件和目录的命名符合规范
 
 ### 4. 验证代码结构
+
 - 检查生成的代码结构是否符合规范
 - 确保代码结构清晰、易于维护和扩展
 - 验证文件和目录的命名是否正确
@@ -42,6 +54,7 @@ references:
 ## 输出格式
 
 ### 代码结构说明
+
 ```
 项目根目录/
 ├── 目录1/
@@ -53,6 +66,7 @@ references:
 ```
 
 ### 文件说明
+
 对于每个目录和文件，提供以下说明：
 - 目录/文件名
 - 功能说明
@@ -68,27 +82,3 @@ references:
 6. **测试分离**：测试代码应与业务代码分离
 7. **配置管理**：配置文件应统一管理
 8. **依赖管理**：第三方依赖应统一管理
-
-## 适用场景
-
-- 生成新代码时的文件结构组织
-- 修改现有代码时的结构调整
-- 重构项目时的架构优化
-- 代码审查时的结构检查
-
-## 不适用场景
-
-- 纯粹的代码逻辑修改（不涉及文件结构）
-- 简单的 bug 修复（不涉及文件结构）
-- 配置文件的修改（不涉及代码结构）
-
-## 参考文档
-
-各语言的详细架构规范请参考以下文档：
-- [Go 语言架构规范](references/go.md)
-- [JavaScript 架构规范](references/js.md)
-- [Vue 架构规范](references/vue.md)
-- [React 架构规范](references/react.md)
-- [Angular 架构规范](references/angular.md)
-- [Electron 架构规范](references/electron.md)
-- [Node.js 架构规范](references/nodejs.md)
